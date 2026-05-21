@@ -1,8 +1,8 @@
-package org.antibot.Model.ObjectTables;
+package org.antibot.Response;
 
 import java.sql.Date;
 
-public class ObjAsClassfication {
+public class AsClassificationResult {
     private String id;
     private String as_number;
     private String as_name;
@@ -11,8 +11,8 @@ public class ObjAsClassfication {
     private Date created_at;
     private Date updated_at;
 
-    public ObjAsClassfication(){}
-    public ObjAsClassfication(String id, String as_number, String as_name, String country_code, boolean rom, Date created_at, Date updated_at){
+    public AsClassificationResult(){}
+    public AsClassificationResult(String id, String as_number, String as_name, String country_code, boolean rom, Date created_at, Date updated_at){
         this.id = id;
         this.as_name = as_name;
         this.as_number = as_number;

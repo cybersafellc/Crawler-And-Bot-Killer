@@ -7,18 +7,14 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.AsnResponse;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.model.CountryResponse;
-import com.maxmind.geoip2.record.Country;
-import org.antibot.Model.AsClassifiaction;
 import org.antibot.Model.Connections;
-import org.antibot.Model.ObjectTables.ObjAsClassfication;
+import org.antibot.Response.AsClassificationResult;
 import org.antibot.Response.LookupAllResult;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Objects;
 
 public class BotKiller {
     private final File dbAsn;
@@ -37,7 +33,7 @@ public class BotKiller {
         LookupAllResult allResult = new LookupAllResult();
         allResult.setAsnResponse(asnLookup(net));
         allResult.setCityResponse(cityLookup(net));
-        allResult.setCountryResponse(getCountry(net));
+        allResult.setCountryResponse(countryLookup(net));
         allResult.setObjAsClassfication(romChecker(net));
         return allResult;
     }
@@ -47,14 +43,14 @@ public class BotKiller {
         return maper.writeValueAsString(lookupAll(net));
     }
 
-    public ObjAsClassfication romChecker(String net){
+    public AsClassificationResult romChecker(String net){
         AsnResponse asnResponse = getAsnResponse(net);
         return database.asClassifiaction.getByAsNumber("AS"+asnResponse.getAutonomousSystemNumber());
     }
 
     public String romCheckerJson(String net){
         AsnResponse asnResponse = getAsnResponse(net);
-        ObjAsClassfication asClassifiaction = database.asClassifiaction.getByAsNumber("AS" + asnResponse.getAutonomousSystemNumber());
+        AsClassificationResult asClassifiaction = database.asClassifiaction.getByAsNumber("AS" + asnResponse.getAutonomousSystemNumber());
         try{
             return objAsClassificationObjToJson(asClassifiaction);
         } catch (Exception e) {
@@ -78,11 +74,11 @@ public class BotKiller {
         return getCityResponse(net).toJson();
     }
 
-    public CountryResponse getCountry(String net){
+    public CountryResponse countryLookup(String net){
         return getCountryResponse(net);
     }
 
-    public String getCountryJson(String net) throws IOException {
+    public String countryLookupJson(String net) throws IOException {
         return getCountryResponse(net).toJson();
     }
 
@@ -120,10 +116,8 @@ public class BotKiller {
         }
     }
 
-    private String objAsClassificationObjToJson(ObjAsClassfication object) throws JsonProcessingException{
+    private String objAsClassificationObjToJson(AsClassificationResult object) throws JsonProcessingException{
         ObjectMapper maper = new ObjectMapper();
         return maper.writeValueAsString(object);
     }
-
-
 }
