@@ -3,7 +3,6 @@ package org.antibot.Response;
 import com.maxmind.geoip2.model.AsnResponse;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.model.CountryResponse;
-import org.antibot.Model.ObjectTables.ObjAsClassfication;
 
 public class LookupAllResult {
     private AsnResponse asnResponse;

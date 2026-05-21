@@ -1,6 +1,6 @@
 package org.antibot.Model;
 
-import org.antibot.Model.ObjectTables.ObjAsClassfication;
+import org.antibot.Response.ObjAsClassfication;
 
 import java.sql.*;
 import java.util.ArrayList;

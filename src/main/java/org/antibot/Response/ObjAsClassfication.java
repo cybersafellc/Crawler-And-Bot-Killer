@@ -1,4 +1,4 @@
-package org.antibot.Model.ObjectTables;
+package org.antibot.Response;
 
 import java.sql.Date;
 
