@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class BotKiller {
-    File dbAsn;
-    File dbCity;
-    File dbCountry;
-    Connections database;
+    private final File dbAsn;
+    private final File dbCity;
+    private final File dbCountry;
+    private final Connections database;
 
     public BotKiller() throws SQLException {
         this.dbAsn = new File("geolitedb/GeoLite2-ASN.mmdb");
@@ -33,13 +33,6 @@ public class BotKiller {
         this.database = new Connections();
     }
 
-//    static void main() throws SQLException, IOException {
-//        BotKiller bot = new BotKiller();
-//        LookupAllResult result = bot.lookupAll("8.8.8.8");
-//        ObjectMapper maper = new ObjectMapper();
-//        System.out.println(maper.writeValueAsString(result));
-//    }
-
     public LookupAllResult lookupAll(String net){
         LookupAllResult allResult = new LookupAllResult();
         allResult.setAsnResponse(asnLookup(net));
@@ -47,6 +40,11 @@ public class BotKiller {
         allResult.setCountryResponse(getCountry(net));
         allResult.setObjAsClassfication(romChecker(net));
         return allResult;
+    }
+
+    public String lookupAllJson(String net) throws JsonProcessingException {
+        ObjectMapper maper = new ObjectMapper();
+        return maper.writeValueAsString(lookupAll(net));
     }
 
     public ObjAsClassfication romChecker(String net){
