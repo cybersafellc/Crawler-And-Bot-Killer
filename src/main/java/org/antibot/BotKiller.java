@@ -8,7 +8,7 @@ import com.maxmind.geoip2.model.AsnResponse;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.model.CountryResponse;
 import org.antibot.Model.Connections;
-import org.antibot.Response.ObjAsClassfication;
+import org.antibot.Response.AsClassificationResult;
 import org.antibot.Response.LookupAllResult;
 
 import java.io.File;
@@ -43,14 +43,14 @@ public class BotKiller {
         return maper.writeValueAsString(lookupAll(net));
     }
 
-    public ObjAsClassfication romChecker(String net){
+    public AsClassificationResult romChecker(String net){
         AsnResponse asnResponse = getAsnResponse(net);
         return database.asClassifiaction.getByAsNumber("AS"+asnResponse.getAutonomousSystemNumber());
     }
 
     public String romCheckerJson(String net){
         AsnResponse asnResponse = getAsnResponse(net);
-        ObjAsClassfication asClassifiaction = database.asClassifiaction.getByAsNumber("AS" + asnResponse.getAutonomousSystemNumber());
+        AsClassificationResult asClassifiaction = database.asClassifiaction.getByAsNumber("AS" + asnResponse.getAutonomousSystemNumber());
         try{
             return objAsClassificationObjToJson(asClassifiaction);
         } catch (Exception e) {
@@ -116,7 +116,7 @@ public class BotKiller {
         }
     }
 
-    private String objAsClassificationObjToJson(ObjAsClassfication object) throws JsonProcessingException{
+    private String objAsClassificationObjToJson(AsClassificationResult object) throws JsonProcessingException{
         ObjectMapper maper = new ObjectMapper();
         return maper.writeValueAsString(object);
     }

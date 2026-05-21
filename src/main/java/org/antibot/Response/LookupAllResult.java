@@ -8,7 +8,7 @@ public class LookupAllResult {
     private AsnResponse asnResponse;
     private CityResponse cityResponse;
     private CountryResponse countryResponse;
-    private ObjAsClassfication objAsClassfication;
+    private AsClassificationResult asClassificationResult;
 
     public LookupAllResult(){}
 
@@ -24,8 +24,8 @@ public class LookupAllResult {
         this.countryResponse = countryResponse;
     }
 
-    public void setObjAsClassfication(ObjAsClassfication objAsClassfication) {
-        this.objAsClassfication = objAsClassfication;
+    public void setObjAsClassfication(AsClassificationResult asClassificationResult) {
+        this.asClassificationResult = asClassificationResult;
     }
 
     public AsnResponse getAsnResponse() {
@@ -40,7 +40,7 @@ public class LookupAllResult {
         return countryResponse;
     }
 
-    public ObjAsClassfication getObjAsClassfication() {
-        return objAsClassfication;
+    public AsClassificationResult getObjAsClassfication() {
+        return asClassificationResult;
     }
 }

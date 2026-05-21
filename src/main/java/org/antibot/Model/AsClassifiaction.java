@@ -1,6 +1,6 @@
 package org.antibot.Model;
 
-import org.antibot.Response.ObjAsClassfication;
+import org.antibot.Response.AsClassificationResult;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,16 +20,16 @@ public class AsClassifiaction {
         this.host = host;
     }
 
-    public ArrayList<ObjAsClassfication> getAll(){
+    public ArrayList<AsClassificationResult> getAll(){
         try(
                 Connection conn = DriverManager.getConnection(host, username, password);
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query_getall);
                 ){
-            ArrayList<ObjAsClassfication> data = new ArrayList<>();
+            ArrayList<AsClassificationResult> data = new ArrayList<>();
             while (rs.next()){
 
-                ObjAsClassfication obj = new ObjAsClassfication(rs.getString("id"), rs.getString("as_number"), rs.getString("as_name"), rs.getString("country_code"), rs.getBoolean("rom"), rs.getDate("created_at"), rs.getDate("updated_at"));
+                AsClassificationResult obj = new AsClassificationResult(rs.getString("id"), rs.getString("as_number"), rs.getString("as_name"), rs.getString("country_code"), rs.getBoolean("rom"), rs.getDate("created_at"), rs.getDate("updated_at"));
                 data.add(obj);
             }
             return data;
@@ -38,7 +38,7 @@ public class AsClassifiaction {
         }
     }
 
-    public ObjAsClassfication getById(String id){
+    public AsClassificationResult getById(String id){
         try(
                 Connection conn = DriverManager.getConnection(host, username, password);
                 PreparedStatement pr = conn.prepareStatement(query_by_id)
@@ -48,16 +48,16 @@ public class AsClassifiaction {
                     ResultSet rs = pr.executeQuery();
                     ){
                 while (rs.next()){
-                    return new ObjAsClassfication(rs.getString("id"), rs.getString("as_number"), rs.getString("as_name"), rs.getString("country_code"), rs.getBoolean("rom"), rs.getDate("created_at"), rs.getDate("updated_at"));
+                    return new AsClassificationResult(rs.getString("id"), rs.getString("as_number"), rs.getString("as_name"), rs.getString("country_code"), rs.getBoolean("rom"), rs.getDate("created_at"), rs.getDate("updated_at"));
                 }
             }
-            return new ObjAsClassfication();
+            return new AsClassificationResult();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public ObjAsClassfication getByAsNumber(String asNumber){
+    public AsClassificationResult getByAsNumber(String asNumber){
         try(
                 Connection conn = DriverManager.getConnection(host, username, password);
                 PreparedStatement pr = conn.prepareStatement(query_by_as_number)
@@ -67,10 +67,10 @@ public class AsClassifiaction {
                     ResultSet rs = pr.executeQuery();
             ){
                 while (rs.next()){
-                    return new ObjAsClassfication(rs.getString("id"), rs.getString("as_number"), rs.getString("as_name"), rs.getString("country_code"), rs.getBoolean("rom"), rs.getDate("created_at"), rs.getDate("updated_at"));
+                    return new AsClassificationResult(rs.getString("id"), rs.getString("as_number"), rs.getString("as_name"), rs.getString("country_code"), rs.getBoolean("rom"), rs.getDate("created_at"), rs.getDate("updated_at"));
                 }
             }
-            return new ObjAsClassfication();
+            return new AsClassificationResult();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
