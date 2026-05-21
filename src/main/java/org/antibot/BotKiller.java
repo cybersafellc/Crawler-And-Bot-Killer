@@ -11,6 +11,7 @@ import com.maxmind.geoip2.record.Country;
 import org.antibot.Model.AsClassifiaction;
 import org.antibot.Model.Connections;
 import org.antibot.Model.ObjectTables.ObjAsClassfication;
+import org.antibot.Response.LookupAllResult;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,10 +33,20 @@ public class BotKiller {
         this.database = new Connections();
     }
 
-    static void main() throws SQLException, IOException {
-        BotKiller bot = new BotKiller();
-        CountryResponse rclassification = bot.getCountry("8.8.8.8");
-        System.out.println(rclassification.toJson());
+//    static void main() throws SQLException, IOException {
+//        BotKiller bot = new BotKiller();
+//        LookupAllResult result = bot.lookupAll("8.8.8.8");
+//        ObjectMapper maper = new ObjectMapper();
+//        System.out.println(maper.writeValueAsString(result));
+//    }
+
+    public LookupAllResult lookupAll(String net){
+        LookupAllResult allResult = new LookupAllResult();
+        allResult.setAsnResponse(asnLookup(net));
+        allResult.setCityResponse(cityLookup(net));
+        allResult.setCountryResponse(getCountry(net));
+        allResult.setObjAsClassfication(romChecker(net));
+        return allResult;
     }
 
     public ObjAsClassfication romChecker(String net){
