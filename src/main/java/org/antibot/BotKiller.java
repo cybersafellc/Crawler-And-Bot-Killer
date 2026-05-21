@@ -6,9 +6,8 @@ import org.antibot.Model.Connections;
 import org.antibot.Model.ObjectTables.ObjAsClassfication;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class Main {
+public class BotKiller {
     static void main() {
         try{
             Connections db = new Connections();
