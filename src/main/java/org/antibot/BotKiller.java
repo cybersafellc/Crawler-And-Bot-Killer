@@ -7,6 +7,7 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.AsnResponse;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.model.CountryResponse;
+import org.antibot.Interface.ConfigSetup;
 import org.antibot.Model.Connections;
 import org.antibot.Response.AsClassificationResult;
 import org.antibot.Response.LookupAllResult;
@@ -22,11 +23,11 @@ public class BotKiller {
     private final File dbCountry;
     private final Connections database;
 
-    public BotKiller() throws SQLException {
-        this.dbAsn = new File("geolitedb/GeoLite2-ASN.mmdb");
-        this.dbCity = new File("geolitedb/GeoLite2-City.mmdb");
-        this.dbCountry = new File("geolitedb/GeoLite2-Country.mmdb");
-        this.database = new Connections();
+    public BotKiller(ConfigSetup configSetup) throws SQLException {
+        this.dbAsn = new File(configSetup.getAsnPath());
+        this.dbCity = new File(configSetup.getCityPath());
+        this.dbCountry = new File(configSetup.getCountryPath());
+        this.database = new Connections(configSetup.getMysqlUsername(), configSetup.getMysqlPassword(), configSetup.getMysqlHost());
     }
 
     public LookupAllResult lookupAll(String net){
