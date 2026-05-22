@@ -2,4 +2,5 @@ org/antibot/Response/LookupAllResult.class
 org/antibot/Response/AsClassificationResult.class
 org/antibot/Model/AsClassifiaction.class
 org/antibot/BotKiller.class
+org/antibot/Interface/ConfigSetup.class
 org/antibot/Model/Connections.class

@@ -9,13 +9,6 @@ public class Connections {
     // public field / table object
     public AsClassifiaction asClassifiaction;
 
-    public Connections() throws SQLException{
-        this.username = System.getenv("USER_MYSQL");
-        this.password = System.getenv("PASS_MYSQL");
-        this.host = System.getenv("HOST_MYSQL");
-        setUpConnection();
-    }
-
     public Connections(String user, String password, String host) throws SQLException {
         this.username = user;
         this.password = password;
